@@ -1,2 +1,2 @@
-# this is readme file
+# this is readme file, cloud gurus
 # my first repo
