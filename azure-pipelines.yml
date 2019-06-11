@@ -18,6 +18,4 @@ stages:
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
-    - bash: |
-        echo "A1"
-        git -version
+    - bash: git --version
