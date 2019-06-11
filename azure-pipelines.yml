@@ -20,7 +20,7 @@ stages:
       vmImage: 'Ubuntu-16.04'
     steps:
     - bash: echo "A1"
-    - bash: echo "${Disable_All_Stages}"
+    - bash: echo ${Disable_All_Stages}
 
 - stage: stage2
 
