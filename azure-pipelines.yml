@@ -20,6 +20,7 @@ stages:
     steps:
     - bash: echo "A1"
     - bash: echo $(Disable_All_Stages)
+    - bash: if [$(Disable_All_Stages)=="yes"]; then echo "Flag to stop execution of all stages is set, quitting..."; exit 0; fi
 
 - stage: stage2
 
