@@ -12,6 +12,6 @@ stages:
   jobs:
 
   - job:  A
-    pool: "ubuntu-16.04"
+    pool: rhel
     steps:
     - bash: echo "A"
