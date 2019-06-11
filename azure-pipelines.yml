@@ -20,9 +20,7 @@ stages:
       vmImage: 'Ubuntu-16.04'
     steps:
     - bash: echo "A1"
-    - bash: |
-      [[ "$Disable_All_Stages" == "yes" ]] || { echo "Flag to stop execution of all stages is set, quitting..."; exit 0; }
-    - bash: echo "A2"
+    - bash: echo "$Disable_All_Stages"
 
 - stage: stage2
 
