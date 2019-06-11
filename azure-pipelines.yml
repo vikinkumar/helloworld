@@ -11,12 +11,6 @@ pool:
 stages:
 - stage: stage1
   jobs:
-   - job: A
-     steps:
-     - bash: echo "A"
-
-- stage: stage2
-  jobs:
-   - job: B
-     steps:
-     - bash: echo "B"
+  - job:  A
+    steps:
+    - bash: echo "A"
