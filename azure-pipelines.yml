@@ -21,7 +21,7 @@ stages:
     - bash: echo "A1"
     - bash: echo $(Disable_All_Stages)
     - bash: |
-            ! [[ $(Disable_All_Stages) == yes ]] || { echo "Flag to stop execution of all stages is set, quitting..."; exit 0; }
+            ! [[ $(Disable_All_Stages) != yes ]] || { echo "Flag to stop execution of all stages is set, quitting..."; exit 0; }
 
 - stage: stage2
 
