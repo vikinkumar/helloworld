@@ -1,0 +1,22 @@
+#Kick starter pipeline for applications teams to get started with their AWS journey.
+
+name: 'anl-kickstarter-$(Date:yyyyMMdd)$(Rev:.r)'
+
+trigger:
+- master
+
+pool:
+  vmImage: "ubuntu-16.04"
+
+stages:
+- stage: A
+  jobs:
+   - job: A
+     steps:
+     - bash: echo "A"
+
+- stage: B
+  jobs:
+   - job: B
+     steps:
+     - bash: echo "B"
