@@ -9,14 +9,14 @@ pool:
   vmImage: "ubuntu-16.04"
 
 stages:
-- stage: A
+- stage: "A"
   jobs:
-   - job: A
+   - job: "A"
      steps:
      - bash: echo "A"
 
-- stage: B
+- stage: "B"
   jobs:
-   - job: B
+   - job: "B"
      steps:
      - bash: echo "B"
