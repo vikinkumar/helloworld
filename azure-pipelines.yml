@@ -16,3 +16,13 @@ stages:
       vmImage: 'Ubuntu-16.04'
     steps:
     - bash: echo "A"
+
+- stage: stage2
+
+  jobs:
+
+  - job:  B
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: echo "B"
