@@ -25,6 +25,7 @@ stages:
     - bash: |
             ! git --no-pager log --quiet --exit-code --format='%H' --first-parent --reverse HEAD^..HEAD -- ${FILENAMES} || { echo "Nothing to do. No changes in ${FILENAMES}"; exit 0; }
             echo "A"
+    - bash: echo "Hello job A"
 
 - stage: stage2
 
@@ -41,8 +42,4 @@ stages:
     - bash: |
             ! git --no-pager log --quiet --exit-code --format='%H' --first-parent --reverse HEAD^..HEAD -- ${FILENAMES} || { echo "Nothing to do. No changes in ${FILENAMES}"; exit 0; }
             echo "B"
-
-      
-
-
-
+    - bash: echo "Hello job B"
