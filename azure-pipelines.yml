@@ -18,4 +18,5 @@ stages:
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
-    - bash: git --version
+    - bash: |
+            ! git --no-pager log --quiet --exit-code --format='%H' --first-parent --reverse HEAD^..HEAD -- ${FILENAMES} || { echo "Nothing to do. No changes in ${FILENAMES}"; exit 0; }
