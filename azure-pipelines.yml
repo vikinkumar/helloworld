@@ -67,7 +67,7 @@ stages:
   jobs:
 
   - job:  delete_aws_infra_prd
-    ondition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
@@ -76,11 +76,10 @@ stages:
             #terraform destroy
 
   - job:  delete_aws_infra_dev
-    ondition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     pool:
       vmImage: 'Ubuntu-16.04'
     steps:
     - bash: |
             echo "destroy B in dev"
             #terraform destroy
-      
