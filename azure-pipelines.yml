@@ -7,39 +7,80 @@ variables:
 
 trigger:
 - master
+- dev
 
 stages:
 
-- stage: stage1
+- stage: build_aws_infra
 
   jobs:
 
-  - job:  A
+  - job:  build_aws_infra_prd
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
       vmImage: 'Ubuntu-16.04'
-    variables:
-      FILENAMES: "
-      testfile.txt
-      "
+    steps:
+    - bash: 
+            echo "dev"
+            #terraform init
+            #terraform plan
+            #copy the artifacts
+
+    - bash: echo "Hello job prd"
+  - job:  build_aws_infra_dev
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    pool:
+      vmImage: 'Ubuntu-16.04'
     steps:
     - bash: |
-            ! git --no-pager log --quiet --exit-code --format='%H' --first-parent --reverse HEAD^..HEAD -- ${FILENAMES} || { echo "Nothing to do. No changes in ${FILENAMES}"; exit 0; }
-            echo "A"
-    - bash: echo "Hello job A"
+            echo "prd"
+            #terraform init
+            #terraform plan
+            #copy the artifacts
 
-- stage: stage2
+    - bash: echo "Hello job dev"
+
+- stage: deploy_aws_infra
 
   jobs:
 
-  - job:  B
+  - job:  deploy_aws_infra_prd
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
       vmImage: 'Ubuntu-16.04'
-    variables:
-      FILENAMES: "
-      testfile1.txt
-      "
     steps:
     - bash: |
-            ! git --no-pager log --quiet --exit-code --format='%H' --first-parent --reverse HEAD^..HEAD -- ${FILENAMES} || { echo "Nothing to do. No changes in ${FILENAMES}"; exit 0; }
-            echo "B"
-    - bash: echo "Hello job B"
+            echo "deploy B in prd"
+            #terraform apply
+
+  - job:  deploy_aws_infra_dev
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: |
+            echo "deploy B in dev"
+            #terraform apply
+
+- stage: delete_aws_infra
+
+  jobs:
+
+  - job:  delete_aws_infra_prd
+    ondition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: |
+            echo "destroy B in prd"
+            #terraform destroy
+
+  - job:  delete_aws_infra_dev
+    ondition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: |
+            echo "destroy B in dev"
+            #terraform destroy
+      
