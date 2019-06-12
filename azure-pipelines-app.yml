@@ -43,7 +43,7 @@ stages:
     - bash: echo "Hello job dev"
 - stage: deploy_app
   jobs:
-  - job:  build_ami_prd
+  - job:  deploy_app_prd
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
       vmImage: 'Ubuntu-16.04'
@@ -55,7 +55,7 @@ stages:
             #copy the artifacts
 
     - bash: echo "Hello job prd"
-  - job:  build_ami_dev
+  - job:  deploy_app_dev
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     pool:
       vmImage: 'Ubuntu-16.04'
