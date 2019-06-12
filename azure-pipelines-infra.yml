@@ -1,20 +1,22 @@
 #Kick starter pipeline for applications teams to get started with their AWS journey.
 
-name: 'anl-kickstarter-$(Date:yyyyMMdd)$(Rev:.r)'
+name: 'anl-kickstarter-create-infra-$(Date:yyyyMMdd)$(Rev:.r)'
 
 variables:
   Disable_All_Stages: "yes"
 
 trigger:
-- master
-- dev
+  branches:
+    include:
+    - master
+    - dev
+  paths:
+    include:
+    - infra/*
 
 stages:
-
 - stage: build_aws_infra
-
   jobs:
-
   - job:  build_aws_infra_prd
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
@@ -39,11 +41,8 @@ stages:
             #copy the artifacts
 
     - bash: echo "Hello job dev"
-
 - stage: deploy_aws_infra
-
   jobs:
-
   - job:  deploy_aws_infra_prd
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
@@ -52,7 +51,6 @@ stages:
     - bash: |
             echo "deploy B in prd"
             #terraform apply
-
   - job:  deploy_aws_infra_dev
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     pool:
@@ -61,11 +59,8 @@ stages:
     - bash: |
             echo "deploy B in dev"
             #terraform apply
-
 - stage: delete_aws_infra
-
   jobs:
-
   - job:  delete_aws_infra_prd
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
     pool:
@@ -74,7 +69,6 @@ stages:
     - bash: |
             echo "destroy B in prd"
             #terraform destroy
-
   - job:  delete_aws_infra_dev
     condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
     pool:

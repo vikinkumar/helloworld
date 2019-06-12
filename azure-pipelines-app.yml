@@ -1,0 +1,44 @@
+#Kick starter pipeline for applications teams to get started with their AWS journey.
+
+name: 'anl-kickstarter-create-app-$(Date:yyyyMMdd)$(Rev:.r)'
+
+variables:
+  name: "value"
+
+trigger:
+  branches:
+    include:
+    - master
+    - dev
+  paths:
+    include:
+    - app/*
+
+stages:
+- stage: build_ami
+  jobs:
+  - job:  build_ami_prd
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: 
+            echo "dev"
+            #terraform init
+            #terraform plan
+            #copy the artifacts
+
+    - bash: echo "Hello job prd"
+  - job:  build_ami_dev
+    condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    steps:
+    - bash: |
+            echo "prd"
+            #terraform init
+            #terraform plan
+            #copy the artifacts
+
+    - bash: echo "Hello job dev"
+- stage: deploy_app
